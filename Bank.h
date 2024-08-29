@@ -16,11 +16,14 @@ private:
     string mobileNo;
 
 public:
+    // Default constructor
     Bank() : accountHolderName(""), accountNumber(0), balance(0.0), PIN(0), mobileNo("") {}
 
+    // Parameterized constructor
     Bank(string name, int accNumber, double initialBalance, int pin, string mobile)
         : accountHolderName(name), accountNumber(accNumber), balance(initialBalance), PIN(pin), mobileNo(mobile) {}
 
+    // Function to deposit amount
     void deposit(double amount)
     {
         if (amount > 0)
@@ -34,6 +37,7 @@ public:
         }
     }
 
+    // Function to withdraw amount
     void withdraw(double amount)
     {
         if (amount > 0 && amount <= balance)
@@ -47,6 +51,7 @@ public:
         }
     }
 
+    // Function to display account details
     void displayAccountDetails() const
     {
         cout << "\nAccount Holder: " << accountHolderName << endl;
@@ -55,17 +60,20 @@ public:
         cout << "Mobile Number: " << mobileNo << endl;
     }
 
+    // Function to check the current balance
     void checkBalance() const
     {
         cout << "\nCurrent balance: $" << balance << endl;
     }
 
+    // Function to get the PIN
     int getPin() const
     {
         return PIN;
     }
 
-    void updateMobileNumber(string oldMobile, string newMobile)
+    // Function to update the mobile number
+    void updateMobileNumber(const string &oldMobile, const string &newMobile)
     {
         if (oldMobile == mobileNo)
         {
