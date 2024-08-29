@@ -12,23 +12,25 @@ private:
     string accountHolderName;
     int accountNumber;
     double balance;
+    int PIN;
+    string mobileNo;
 
 public:
-    Bank() : accountHolderName(""), accountNumber(0), balance(0.0) {}
+    Bank() : accountHolderName(""), accountNumber(0), balance(0.0), PIN(0), mobileNo("") {}
 
-    Bank(string name, int accNumber, double initialBalance)
-        : accountHolderName(name), accountNumber(accNumber), balance(initialBalance) {}
+    Bank(string name, int accNumber, double initialBalance, int pin, string mobile)
+        : accountHolderName(name), accountNumber(accNumber), balance(initialBalance), PIN(pin), mobileNo(mobile) {}
 
     void deposit(double amount)
     {
         if (amount > 0)
         {
             balance += amount;
-            cout << "Deposit successful! New balance: $" << balance << endl;
+            cout << "\nDeposit successful! New balance: $" << balance << endl;
         }
         else
         {
-            cout << "Invalid amount!" << endl;
+            cout << "\nInvalid amount!" << endl;
         }
     }
 
@@ -37,24 +39,43 @@ public:
         if (amount > 0 && amount <= balance)
         {
             balance -= amount;
-            cout << "Withdrawal successful! New balance: $" << balance << endl;
+            cout << "\nWithdrawal successful! New balance: $" << balance << endl;
         }
         else
         {
-            cout << "Invalid amount or insufficient funds!" << endl;
+            cout << "\nInvalid amount or insufficient funds!" << endl;
         }
     }
 
     void displayAccountDetails() const
     {
-        cout << "Account Holder: " << accountHolderName << endl;
+        cout << "\nAccount Holder: " << accountHolderName << endl;
         cout << "Account Number: " << accountNumber << endl;
         cout << "Balance: $" << balance << endl;
+        cout << "Mobile Number: " << mobileNo << endl;
     }
 
     void checkBalance() const
     {
-        cout << "Current balance: $" << balance << endl;
+        cout << "\nCurrent balance: $" << balance << endl;
+    }
+
+    int getPin() const
+    {
+        return PIN;
+    }
+
+    void updateMobileNumber(string oldMobile, string newMobile)
+    {
+        if (oldMobile == mobileNo)
+        {
+            mobileNo = newMobile;
+            cout << "\nMobile number updated successfully!" << endl;
+        }
+        else
+        {
+            cout << "\nIncorrect old mobile number!" << endl;
+        }
     }
 };
 
