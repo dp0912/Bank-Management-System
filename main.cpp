@@ -66,7 +66,7 @@ void displayMenu()
     cout << "3. Withdraw" << endl;
     cout << "4. Check Balance" << endl;
     cout << "5. Account Details" << endl;
-    cout << "6. Update Mobile Number" << endl;
+    cout << "6. Update Account Info" << endl; // Updated menu option
     cout << "7. Exit" << endl;
     cout << "\nChoose an option: ";
 }
@@ -251,11 +251,65 @@ int main()
                 cin >> enteredPin;
                 if (enteredPin == bankAccount.getPin())
                 {
-                    cout << "\nEnter old mobile number: ";
-                    cin >> oldMobile;
-                    cout << "\nEnter new mobile number: ";
-                    cin >> newMobile;
-                    bankAccount.updateMobileNumber(oldMobile, newMobile);
+                    // Update entire account information
+                    do
+                    {
+                        cout << "\nEnter New Account Holder Name: ";
+                        cin >> name;
+                        if (!isValidName(name))
+                        {
+                            cout << "\nInvalid name! Only alphabetic characters are allowed. Please try again." << endl;
+                        }
+                    } while (!isValidName(name));
+
+                    do
+                    {
+                        cout << "\nEnter New Account Number: ";
+                        cin >> accNumber;
+                        if (!isValidAccountNumber(accNumber))
+                        {
+                            cout << "\nInvalid account number! Only digits are allowed. Please try again." << endl;
+                        }
+                    } while (!isValidAccountNumber(accNumber));
+
+                    do
+                    {
+                        cout << "\nEnter New Initial Balance: ";
+                        cin >> initialBalance;
+                        if (!isValidBalance(initialBalance))
+                        {
+                            cout << "\nInvalid balance! It must be zero or a positive number. Please try again." << endl;
+                        }
+                    } while (!isValidBalance(initialBalance));
+
+                    do
+                    {
+                        cout << "\nEnter New 4-digit PIN: ";
+                        cin >> pin;
+                        if (!isValidPin(pin))
+                        {
+                            cout << "\nInvalid PIN! It must be a 4-digit number. Please try again." << endl;
+                        }
+                    } while (!isValidPin(pin));
+
+                    do
+                    {
+                        cout << "\nEnter New Mobile Number: ";
+                        cin >> mobile;
+                        if (!isValidMobileNumber(mobile))
+                        {
+                            cout << "\nInvalid mobile number! It should be a 10-digit number. Please try again." << endl;
+                        }
+                    } while (!isValidMobileNumber(mobile));
+
+                    int newAccountNumber = 0;
+                    for (char c : accNumber)
+                    {
+                        newAccountNumber = newAccountNumber * 10 + (c - '0');
+                    }
+
+                    bankAccount = Bank(name, newAccountNumber, initialBalance, pin, mobile);
+                    cout << "\nAccount Information Updated Successfully!" << endl;
                 }
                 else
                 {
